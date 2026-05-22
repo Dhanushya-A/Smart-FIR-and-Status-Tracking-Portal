@@ -22,7 +22,7 @@ A web-based police complaint management system developed using Flask and SQLite.
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/repository-name.git
+https://github.com/Dhanushya-A/Smart-FIR-and-Status-Tracking-Portal.git
 ```
 
 Move into project folder:
