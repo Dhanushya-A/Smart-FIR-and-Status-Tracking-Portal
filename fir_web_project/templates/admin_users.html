@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Admin - Manage Users{% endblock %}
+
+{% block content %}
+<h2>Manage Users</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {% if user.is_active %}
+                    Active
+                {% else %}
+                    Deactivated
+                {% endif %}
+            </td>
+            <td>
+                {% if user.role != 'admin' %}
+                    <a href="{{ url_for('toggle_user_active', user_id=user.id) }}" 
+                       onclick="return confirm('Are you sure you want to {% if user.is_active %}deactivate{% else %}activate{% endif %} this user?')">
+                       {% if user.is_active %}Deactivate{% else %}Activate{% endif %}
+                    </a>
+                {% else %}
+                    &mdash;
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

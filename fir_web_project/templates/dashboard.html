@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - E-Police FIR{% endblock %}
+{% block content %}
+<h2>Dashboard</h2>
+
+<!-- Filter Form -->
+<form method="get" class="row mb-4 g-3 align-items-center">
+  <div class="col-auto">
+    <input type="text" name="search" class="form-control" placeholder="Search description" value="{{ request.args.get('search','') }}">
+  </div>
+  <div class="col-auto">
+    <select name="status" class="form-select">
+      <option value="">All Statuses</option>
+      <option value="pending" {% if request.args.get('status') == 'pending' %}selected{% endif %}>Pending</option>
+      <option value="in-progress" {% if request.args.get('status') == 'in-progress' %}selected{% endif %}>In Progress</option>
+      <option value="closed" {% if request.args.get('status') == 'closed' %}selected{% endif %}>Closed</option>
+    </select>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-secondary" type="submit">Filter</button>
+  </div>
+</form>
+
+<!-- FIR Table -->
+{% if firs %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Submitted At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for fir in firs %}
+    <tr>
+      <td>{{ fir.id }}</td>
+      <td>{{ fir.description[:50] }}{% if fir.description|length > 50 %}...{% endif %}</td>
+      <td>
+        {% if fir.status == 'pending' %}
+          <span class="badge bg-warning text-dark">Pending</span>
+        {% elif fir.status == 'in-progress' %}
+          <span class="badge bg-info text-dark">In Progress</span>
+        {% elif fir.status == 'closed' %}
+          <span class="badge bg-success">Closed</span>
+        {% endif %}
+      </td>
+      <td>{{ fir.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+      <td><a href="{{ url_for('view_fir', fir_id=fir.id) }}" class="btn btn-primary btn-sm">View</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No FIRs found.</p>
+{% endif %}
+
+<!-- GEO TRACKING: Location Info -->
+<hr>
+<h5>📍 Live Location Tracking</h5>
+<p id="location-status">Fetching your location...</p>
+
+<!-- GEO TRACKING SCRIPT -->
+<script>
+  function sendLocation(lat, lng) {
+    fetch('/api/submit-location', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({ latitude: lat, longitude: lng })
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('location-status').innerText =
+        "✅ Location sent at " + new Date().toLocaleTimeString();
+    })
+    .catch(err => {
+      console.error("Location send failed", err);
+      document.getElementById('location-status').innerText =
+        "❌ Failed to send location.";
+    });
+  }
+
+  function getLocationAndSend() {
+    if (!navigator.geolocation) {
+      document.getElementById('location-status').innerText = 'Geolocation not supported.';
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        sendLocation(position.coords.latitude, position.coords.longitude);
+      },
+      error => {
+        document.getElementById('location-status').innerText =
+          "❌ Unable to access location. Please allow location permission.";
+      }
+    );
+  }
+
+  // Send location immediately and every 30 seconds
+  getLocationAndSend();
+  setInterval(getLocationAndSend, 30000);
+</script>
+{% endblock %}

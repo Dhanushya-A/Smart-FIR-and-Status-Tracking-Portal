@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5" style="background: linear-gradient(135deg, #4e73df, #1cc88a); min-height:100vh;">
+
+  <!-- Dashboard Title -->
+  <div class="mb-5 text-center">
+    <h2 class="mb-4 fw-bold"
+    style="color: white; -webkit-text-stroke: 1px #000;">Admin Dashboard</h2>
+  </div>
+
+  <!-- Users -->
+  <div class="card shadow-lg rounded-4 mb-5">
+    <div class="card-body">
+      <h4 class="card-title fw-bold mb-4 text-secondary">All Users</h4>
+      {% if users %}
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>ID</th><th>Username</th><th>Role</th><th>Email</th><th>IMEI</th><th>Status</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for u in users %}
+            <tr class="text-center">
+              <td>{{ u.id }}</td>
+              <td>{{ u.username }}</td>
+              <td><span class="badge bg-primary">{{ u.role }}</span></td>
+              <td>{{ u.email or '-' }}</td>
+              <td>{{ u.imei or '-' }}</td>
+              <td>
+                {% if u.is_active %}
+                  <span class="badge bg-success">Active</span>
+                {% else %}
+                  <span class="badge bg-danger">Banned</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if u.role != 'admin' and u.is_active %}
+                <form action="{{ url_for('ban_user', user_id=u.id) }}" method="POST" class="d-inline">
+                  <button class="btn btn-sm btn-outline-danger shadow-sm">Ban</button>
+                </form>
+                {% else %} — {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <div class="alert alert-info text-center rounded-4 shadow-sm">No users found.</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- FIRs -->
+  <div class="card shadow-lg rounded-4 mb-5">
+    <div class="card-body">
+      <h4 class="card-title fw-bold mb-4 text-secondary">All FIRs</h4>
+      {% if firs %}
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>ID</th><th>Description</th><th>Status</th><th>Complainant</th><th>Assigned</th><th>Assign</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for f in firs %}
+            <tr class="text-center">
+              <td>#{{ f.id }}</td>
+              <td class="text-start">{{ f.description[:60] }}{% if f.description|length>60 %}...{% endif %}</td>
+              <td>
+                {% if f.status=='pending' %}
+                  <span class="badge bg-warning text-dark">Pending</span>
+                {% elif f.status=='in-progress' %}
+                  <span class="badge bg-info text-dark">In Progress</span>
+                {% elif f.status=='closed' %}
+                  <span class="badge bg-success">Closed</span>
+                {% else %}
+                  <span class="badge bg-secondary">Unknown</span>
+                {% endif %}
+              </td>
+              <td>{{ f.complainant.username }}</td>
+              <td>{{ f.assigned_police.username if f.assigned_police else 'Unassigned' }}</td>
+              <td>
+                <form action="{{ url_for('assign_police', fir_id=f.id) }}" method="POST" class="d-flex">
+                  <select name="police_id" class="form-select form-select-sm me-2" required>
+                    <option value="" disabled selected>Select</option>
+                    {% for u in users if u.role == 'police' %}
+                      <option value="{{ u.id }}">{{ u.username }}</option>
+                    {% endfor %}
+                  </select>
+                  <button class="btn btn-sm btn-primary shadow-sm">Assign</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <div class="alert alert-info text-center rounded-4 shadow-sm">No FIRs found.</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Evidence -->
+  <div class="card shadow-lg rounded-4 mb-5">
+    <div class="card-body">
+      <h4 class="card-title fw-bold mb-4 text-secondary">Evidence</h4>
+      {% if evidences %}
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>ID</th><th>FIR</th><th>File</th><th>Status</th><th>Remarks</th><th>Override</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ev in evidences %}
+            <tr class="text-center">
+              <td>{{ ev.id }}</td>
+              <td>#{{ ev.fir_id }}</td>
+              <td><a href="{{ url_for('static', filename=ev.file_path) }}" target="_blank" class="btn btn-sm btn-outline-secondary">View</a></td>
+              <td>
+                {% if ev.status=="Pending" %}
+                  <span class="badge bg-warning text-dark">Pending</span>
+                {% elif ev.status=="Verified" %}
+                  <span class="badge bg-success">Verified</span>
+                {% elif ev.status=="Rejected" %}
+                  <span class="badge bg-danger">Rejected</span>
+                {% else %}
+                  <span class="badge bg-secondary">Unknown</span>
+                {% endif %}
+              </td>
+              <td>{{ ev.remarks or '-' }}</td>
+              <td>
+                <form action="{{ url_for('verify_evidence', evidence_id=ev.id) }}" method="POST" class="d-flex">
+                  <input name="remarks" class="form-control form-control-sm me-2" placeholder="Remarks">
+                  <select name="action" class="form-select form-select-sm me-2" required>
+                    <option value="verify">Verify</option>
+                    <option value="reject">Reject</option>
+                  </select>
+                  <button class="btn btn-sm btn-warning shadow-sm">Override</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <div class="alert alert-info text-center rounded-4 shadow-sm">No evidence available.</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- User Reported Locations -->
+  <div class="card shadow-lg rounded-4 mb-5">
+    <div class="card-body">
+      <h4 class="card-title fw-bold mb-4 text-secondary">User Reported Locations</h4>
+      {% if locations %}
+        <div id="map" style="height:400px;border-radius:12px;overflow:hidden;margin-bottom:20px;"></div>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped align-middle">
+            <thead class="table-dark text-center">
+              <tr>
+                <th>User ID</th><th>Latitude</th><th>Longitude</th><th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for loc in locations %}
+              <tr class="text-center">
+                <td>{{ loc.user_id }}</td>
+                <td>{{ loc.latitude }}</td>
+                <td>{{ loc.longitude }}</td>
+                <td>{{ loc.timestamp }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="alert alert-info text-center rounded-4 shadow-sm">No locations recorded.</div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+<!-- Leaflet.js -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  var locations = {{ locations | tojson }};
+  if (locations.length){
+    var map = L.map('map').setView([locations[0].latitude, locations[0].longitude], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
+    locations.forEach(function(l){
+      if (l.latitude && l.longitude){
+        var marker = L.marker([l.latitude, l.longitude]).addTo(map);
+        marker.bindPopup("User: " + l.user_id + "<br/>" + l.timestamp);
+      }
+    });
+  }
+</script>
+{% endblock %}
