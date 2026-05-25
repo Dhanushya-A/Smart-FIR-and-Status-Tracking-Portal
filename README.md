@@ -1,4 +1,4 @@
-# smart fir and status tracking portal
+# Smart fir and status tracking portal
 
 A web-based police complaint management system developed using Flask and SQLite. The system allows users to register complaints and manage records efficiently.
 
