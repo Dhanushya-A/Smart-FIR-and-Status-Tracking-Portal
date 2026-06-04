@@ -308,11 +308,11 @@ Add screenshots here:
 
 * Login Page
   
-  <img width="866" height="712" alt="Screenshot 2025-10-12 215100" src="https://github.com/user-attachments/assets/18f8c9aa-841b-4828-b6a1-3e2ff50bd8c3" />
+  <img width="766" height="512" alt="Screenshot 2025-10-12 215100" src="https://github.com/user-attachments/assets/18f8c9aa-841b-4828-b6a1-3e2ff50bd8c3" />
 * Registration Page
-  <img width="869" height="711" alt="Screenshot 2025-10-12 215223" src="https://github.com/user-attachments/assets/114034b8-1d3f-4a95-98b4-16d2d7af0997" />
+  <img width="769" height="511" alt="Screenshot 2025-10-12 215223" src="https://github.com/user-attachments/assets/114034b8-1d3f-4a95-98b4-16d2d7af0997" />
 * FIR Submission Form
-  <img width="950" height="711" alt="Screenshot 2025-10-12 220242" src="https://github.com/user-attachments/assets/bea763d9-cbeb-442b-b483-a8a9e75fadc1" />
+  <img width="750" height="511" alt="Screenshot 2025-10-12 220242" src="https://github.com/user-attachments/assets/bea763d9-cbeb-442b-b483-a8a9e75fadc1" />
 * Police Dashboard
   <img width="1788" height="709" alt="Screenshot 2025-10-12 160011" src="https://github.com/user-attachments/assets/8793a60a-b882-4365-b47d-a6fc8d1d9d9a" />
 
