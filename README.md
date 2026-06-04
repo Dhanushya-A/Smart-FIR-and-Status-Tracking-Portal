@@ -1,4 +1,4 @@
-# 🚔 Smart FIR and Status Tracking Portal
+#  Smart FIR and Status Tracking Portal
 
 A secure web-based FIR (First Information Report) Management System developed using Flask that enables complainants, police officers, and administrators to manage FIRs digitally. The system supports FIR submission, evidence management, status tracking, email notifications, SMS alerts, geolocation tracking, and role-based access control.
 
@@ -307,6 +307,7 @@ Admins can:
 Add screenshots here:
 
 * Login Page
+  
   <img width="866" height="812" alt="Screenshot 2025-10-12 215100" src="https://github.com/user-attachments/assets/18f8c9aa-841b-4828-b6a1-3e2ff50bd8c3" />
 * Registration Page
   <img width="869" height="811" alt="Screenshot 2025-10-12 215223" src="https://github.com/user-attachments/assets/114034b8-1d3f-4a95-98b4-16d2d7af0997" />
@@ -323,8 +324,8 @@ Add screenshots here:
 ## 👨‍💻 Developer
 
 Developed by **Dhanushya**
-
-Final Year B.Sc Information Technology Student
+Department of Information Technology
+PKN Arts ans Science College
 
 ---
 
