@@ -330,7 +330,7 @@ Developed by **Dhanushya**
 
 Department of Information Technology
 
-PKN Arts ans Science College
+PKN Arts and Science College
 
 ---
 
