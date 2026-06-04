@@ -307,13 +307,16 @@ Admins can:
 Add screenshots here:
 
 * Login Page
-  <img width="1620" height="869" alt="Screenshot 2025-10-03 113658" src="https://github.com/user-attachments/assets/914841b4-b242-4ce3-a5a0-411af8df5856" />
-
+  <img width="866" height="812" alt="Screenshot 2025-10-12 215100" src="https://github.com/user-attachments/assets/18f8c9aa-841b-4828-b6a1-3e2ff50bd8c3" />
 * Registration Page
+  <img width="869" height="811" alt="Screenshot 2025-10-12 215223" src="https://github.com/user-attachments/assets/114034b8-1d3f-4a95-98b4-16d2d7af0997" />
 * FIR Submission Form
-* Complainant Dashboard
+  <img width="950" height="911" alt="Screenshot 2025-10-12 220242" src="https://github.com/user-attachments/assets/bea763d9-cbeb-442b-b483-a8a9e75fadc1" />
 * Police Dashboard
+  <img width="1788" height="909" alt="Screenshot 2025-10-12 160011" src="https://github.com/user-attachments/assets/8793a60a-b882-4365-b47d-a6fc8d1d9d9a" />
+
 * Admin Dashboard
+* Complainant Dashboard
 
 ---
 
