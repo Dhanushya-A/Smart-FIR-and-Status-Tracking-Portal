@@ -1,62 +1,330 @@
-# Smart fir and status tracking portal
+# 🚔 Smart FIR and Status Tracking Portal
 
-A web-based police complaint management system developed using Flask and SQLite. The system allows users to register complaints and manage records efficiently.
+A secure web-based FIR (First Information Report) Management System developed using Flask that enables complainants, police officers, and administrators to manage FIRs digitally. The system supports FIR submission, evidence management, status tracking, email notifications, SMS alerts, geolocation tracking, and role-based access control.
 
-## Features
-- User registration and login
-- Complaint submission
-- Complaint tracking
-- Admin management
-- Database storage using SQLite
+---
 
-## Technologies Used
-- Python
-- Flask
-- HTML
-- CSS
-- JavaScript
-- SQLite
+## 📌 Features
 
-## Installation
+### 👤 User Management
 
-Clone the repository:
+* User Registration and Login
+* Password Reset
+* Role-Based Access Control
 
-```bash
-https://github.com/Dhanushya-A/Smart-FIR-and-Status-Tracking-Portal.git
+  * Complainant
+  * Police Officer
+  * Administrator
+* Secure Password Hashing
+
+### 📝 FIR Management
+
+* Submit FIR Online
+* Track FIR Status
+* Assign FIRs to Police Officers
+* Update FIR Investigation Status
+* FIR History and Timeline
+
+### 📂 Evidence Management
+
+* Upload Multimedia Evidence
+
+  * Images
+  * Videos
+  * Audio Files
+  * PDF Documents
+* Evidence Verification by Police
+* Evidence Rejection with Remarks
+* Evidence Audit Logs
+
+### 📧 Email Notifications
+
+* Registration Confirmation
+* FIR Submission Confirmation
+* FIR Status Updates
+* Evidence Verification Notifications
+
+### 📱 SMS Notifications
+
+* FIR Status Alerts
+* Evidence Verification Updates
+* Twilio API Integration
+
+### 📍 Geo-Location Tracking
+
+* Store User Coordinates
+* View User Locations
+* Admin Location Monitoring Dashboard
+
+### 🔐 Security Features
+
+* Password Hashing
+* Session Management
+* Role-Based Authorization
+* Secure File Upload Validation
+* Device Locking Using IMEI
+
+---
+
+## 🛠️ Technologies Used
+
+### Backend
+
+* Python
+* Flask
+* Flask-SQLAlchemy
+* Flask-Login
+* Flask-Migrate
+
+### Database
+
+* SQLite
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap
+
+### APIs & Services
+
+* Twilio SMS API
+* Flask-Mail SMTP Service
+
+### Utilities
+
+* dotenv
+* Werkzeug
+
+---
+
+## 📁 Project Structure
+
+```text
+E-Police-System/
+│
+├── static/
+│   ├── uploads/
+│   ├── css/
+│   ├── js/
+│
+├── templates/
+│   ├── login.html
+│   ├── register.html
+│   ├── submit_fir.html
+│   ├── complainant_dashboard.html
+│   ├── police_dashboard.html
+│   ├── admin_dashboard.html
+│   └── view_fir.html
+│
+├── app.py
+├── requirements.txt
+├── .env
+├── README.md
+└── instance/
 ```
 
-Move into project folder:
+---
+
+## ⚙️ Installation
+
+### 1. Clone Repository
 
 ```bash
-cd repository-name
+git clone https://github.com/yourusername/e-police-fir-system.git
+cd e-police-fir-system
 ```
 
-Install dependencies:
+### 2. Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### 3. Activate Environment
+
+#### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+#### Linux/Mac
+
+```bash
+source venv/bin/activate
+```
+
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application:
+### 5. Configure Environment Variables
+
+Create a `.env` file:
+
+```env
+SECRET_KEY=your_secret_key
+
+DATABASE_URL=sqlite:///epolice.db
+
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_email_password
+
+TWILIO_ACCOUNT_SID=your_sid
+TWILIO_AUTH_TOKEN=your_token
+TWILIO_PHONE_NUMBER=your_twilio_number
+
+UPLOAD_FOLDER=static/uploads
+```
+
+### 6. Run Database
 
 ```bash
 python app.py
 ```
 
-Open browser:
+### 7. Start Application
 
-```text
-http://127.0.0.1:5000/
+```bash
+python app.py
 ```
 
-## Project Structure
+Visit:
 
 ```text
-project/
-│── app.py
-│── templates/
-│── static/
-│── uploads/
-│── requirements.txt
-│── README.md
+http://127.0.0.1:5000
 ```
+
+---
+
+## 👥 User Roles
+
+### Complainant
+
+* Register/Login
+* Submit FIR
+* Upload Evidence
+* Track FIR Status
+* Receive Notifications
+
+### Police Officer
+
+* View Assigned FIRs
+* Verify Evidence
+* Reject Evidence
+* Update FIR Status
+
+### Administrator
+
+* Manage Users
+* Ban Users
+* Assign Police Officers
+* Monitor Locations
+* View All FIRs
+* Override Evidence Decisions
+
+---
+
+## 📊 Database Models
+
+### User
+
+Stores user information and authentication details.
+
+### FIR
+
+Stores FIR records and investigation details.
+
+### Evidence
+
+Stores uploaded files related to FIRs.
+
+### FIRStatusUpdate
+
+Stores FIR progress history.
+
+### EvidenceLog
+
+Stores evidence verification logs.
+
+### UserLocation
+
+Stores user GPS coordinates.
+
+---
+
+## 🔔 Notification System
+
+### Email Notifications
+
+* User Registration
+* FIR Submission
+* FIR Status Changes
+* Evidence Verification
+
+### SMS Notifications
+
+* FIR Updates
+* Evidence Approval/Rejection
+
+Powered by Twilio API.
+
+---
+
+## 📍 Location Tracking
+
+The system captures and stores user coordinates during FIR submission and location updates.
+
+Admins can:
+
+* View latest user locations
+* Monitor complainant locations
+* Track investigation-related positions
+
+---
+
+## 🔮 Future Enhancements
+
+* AI-Based Crime Analysis
+* Face Recognition Integration
+* Aadhaar Verification
+* Digital Signature Support
+* Crime Hotspot Visualization
+* Real-Time Police Tracking
+* Mobile Application
+
+---
+
+## 📸 Screenshots
+
+Add screenshots here:
+
+* Login Page
+  <img width="1620" height="869" alt="Screenshot 2025-10-03 113658" src="https://github.com/user-attachments/assets/914841b4-b242-4ce3-a5a0-411af8df5856" />
+
+* Registration Page
+* FIR Submission Form
+* Complainant Dashboard
+* Police Dashboard
+* Admin Dashboard
+
+---
+
+## 👨‍💻 Developer
+
+Developed by **Dhanushya**
+
+Final Year B.Sc Information Technology Student
+
+---
+
+## 📄 License
+
+This project is developed for educational and academic purposes.
