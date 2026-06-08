@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Latest User Locations</h2>
+  </div>
+
+  <div class="mb-3">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if locations %}
+          {% for loc in locations %}
+          <tr>
+            <td>{{ loc.user_id }}</td>
+            <td>{{ loc.latitude }}</td>
+            <td>{{ loc.longitude }}</td>
+            <td>{{ loc.timestamp }}</td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr><td colspan="4" class="text-center">No locations shared yet.</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Map view</h4>
+  <div id="map" style="height:500px;border:1px solid #ddd;"></div>
+</div>
+
+<!-- Leaflet JS/CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+<script>
+  const locations = {{ locations|tojson }};
+  const map = L.map('map').setView([20.5937,78.9629], 5); // center on India by default
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  if (locations.length === 0) {
+    // nothing to show
+  } else {
+    const latlngs = [];
+    locations.forEach(loc => {
+      if (!loc.latitude || !loc.longitude) return;
+      const marker = L.marker([loc.latitude, loc.longitude]).addTo(map);
+      const ts = loc.timestamp ? new Date(loc.timestamp).toLocaleString() : 'unknown';
+      marker.bindPopup(`<b>User ID:</b> ${loc.user_id}<br><b>Time:</b> ${ts}`);
+      latlngs.push([loc.latitude, loc.longitude]);
+    });
+    if (latlngs.length) map.fitBounds(latlngs, { padding: [40, 40] });
+  }
+</script>
+{% endblock %}

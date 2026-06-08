@@ -1,0 +1,200 @@
+/* ===========================
+   Global Styles
+=========================== */
+body {
+    background-color: #f4f6f9;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #333;
+}
+
+/* Center containers on all pages */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Page Titles */
+h1, h2, h3 {
+    color: #004080;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ===========================
+   Navbar
+=========================== */
+.navbar {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.navbar-brand {
+    font-weight: bold;
+    font-size: 20px;
+}
+.nav-link {
+    transition: 0.2s;
+}
+.nav-link:hover {
+    color: #ffcc00 !important;
+}
+
+/* ===========================
+   Forms (Login, Register, FIR)
+=========================== */
+form {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    max-width: 600px;   /* keep forms narrow for alignment */
+    margin: 0 auto;     /* center the form */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label,
+.form-label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+}
+.form-control:focus {
+    border-color: #004080;
+    box-shadow: 0 0 4px rgba(0,64,128,0.3);
+}
+
+/* Buttons */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #004080;
+    border-color: #004080;
+    transition: 0.3s;
+}
+.btn-primary:hover {
+    background-color: #00264d;
+    border-color: #00264d;
+}
+
+/* Special login button (gradient look) */
+.btn-login {
+    border-radius: 50px;
+    padding: 12px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    border: none;
+    transition: 0.3s;
+}
+.btn-login:hover {
+    background: linear-gradient(90deg, #ff5722, #ff9800);
+    transform: scale(1.05);
+}
+
+/* ===========================
+   Login/Register Page
+=========================== */
+.login-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.login-box h2 {
+    font-weight: 700;
+    color: #004080;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Link styling */
+.link-custom {
+    color: #004080;
+    font-weight: 600;
+    text-decoration: none;
+}
+.link-custom:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Alerts / Flash messages
+=========================== */
+.alert {
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* ===========================
+   Dashboard & Cards
+=========================== */
+.card {
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    padding: 15px;
+}
+.card h5 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.card p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* ===========================
+   Tables (for FIR lists, status updates, etc.)
+=========================== */
+.table {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+}
+.table th {
+    background-color: #004080;
+    color: #ffffff;
+    text-align: center;
+}
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* ===========================
+   Footer
+=========================== */
+footer {
+    margin-top: 30px;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
