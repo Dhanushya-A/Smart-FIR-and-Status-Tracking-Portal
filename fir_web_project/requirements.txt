@@ -1,9 +1,10 @@
-flask
-flask_sqlalchemy
-flask_login
-flask_mail
-flask_migrate
-apscheduler
-twilio
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Flask-Mail
+Flask-Migrate
 python-dotenv
 gunicorn
+Werkzeug
+SQLAlchemy
+twilio
